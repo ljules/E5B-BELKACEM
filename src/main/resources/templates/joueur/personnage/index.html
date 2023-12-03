@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+
+
+    <h1>Liste des personnages</h1>
+    <a href="/joueur/personnage/create" class="btn btn-primary my-2">
+        Ajouter un personnage
+    </a>
+    <div class="row row-col-3">
+        <!-- Loop through each character -->
+        <div th:each="personnage : ${personnages}" class="col-md-4 mb-4">
+            <div class="card">
+                <img th:src="@{/img/personnage/hero.jpg}" class="card-img-top" alt="Default Image">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${personnage.nom}"></h5>
+                    <p class="card-text" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Attaque :
+                            <span class="badge bg-primary rounded-pill" th:text="${personnage.attaque}"></span>
+                        </li>
+                        <li class="list-group-item">Defense :
+                            <span class="badge bg-primary rounded-pill" th:text="${personnage.defense}"></span>
+                        </li>
+                        <li class="list-group-item">Endurance :
+                            <span class="badge bg-primary rounded-pill" th:text="${personnage.endurance}"></span>
+                        </li>
+                        <li class="list-group-item">Vitesse :
+                            <span class="badge bg-primary rounded-pill" th:text="${personnage.vitesse}"></span>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Arme :
+                            <div th:if="${personnage.armeEquipee!=null}"
+                                 th:style="'color :'+${personnage.armeEquipee.qualite.getCouleur()}"
+                                 th:text="${personnage.armeEquipee.nom}"></div>
+                            <div th:unless="${personnage.armeEquipee!=null}">Pas d'arme</div>
+                        </li>
+                        <li class="list-group-item">
+                            Armure :
+                            <div th:if="${personnage.armureEquipee!=null}"
+                                 th:style="'color :'+${personnage.armureEquipee.qualite.getCouleur()}"
+                                 th:text="${personnage.armureEquipee.nom}"></div>
+                            <div th:unless="${personnage.armureEquipee!=null}">Pas d'armure</div>
+                        </li>
+                        <li class="list-group-item">
+                            Accessoire :
+                            <div th:if="${personnage.accessoire!=null}"
+                                 th:style="'color :'+${personnage.accessoire.qualite.getCouleur()}"
+                                 th:text="${personnage.accessoire.nom}"></div>
+                            <div th:unless="${personnage.accessoire!=null}">Pas d'accessoire</div>
+                        </li>
+                    </ul>
+
+                    </p>
+
+
+                    <a th:href="@{'/joueur/personnage/' + ${personnage.id}}" class="btn btn-primary">
+                        Voir les détails
+                    </a>
+                    <a th:href="@{'/joueur/personnage/' + ${personnage.id}+'/edit'}" class="btn btn-primary">
+                       Modifier
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+</div>
+
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

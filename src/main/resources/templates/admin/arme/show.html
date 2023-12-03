@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails de l'arme</h1>
+        <div>
+            <p><strong>Nom : </strong> <span th:text="${arme.nom}"></span></p>
+            <p><strong>Description : </strong> <span th:text="${arme.description}"></span></p>
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Type d'arme : </strong> <span th:text="${arme.typeArme.nom}"></span></p>
+                    <p><strong> Des de dégats : </strong> <span th:text="${arme.typeArme.nbrDes+'d'+arme.typeArme.maxDes}"></span></p>
+                    <p><strong>Déclencheur Critique : </strong> <span th:text="${arme.typeArme.limiteCritique}"></span></p>
+                    <p><strong>Multiplicateur Critique : </strong> <span th:text="${arme.typeArme.mutiplicateurCritique}"></span></p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Qualité : </strong> <span th:text="${arme.qualite.nom}"></span></p>
+                    <p><strong>Bonus de qualité : </strong> <span th:text="${arme.qualite.bonusQualite}"></span></p>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div>
+            <a th:href="@{'/admin/arme/'+${arme.id}+'/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/arme'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

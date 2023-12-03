@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Ajouter un type d'accessoire</h1>
+        <form novalidate class="validation" th:action="@{/admin/typeAccessoire}" th:object="${nouveauTypeAccessoire}" method="post">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="nom" th:field="${nouveauTypeAccessoire.nom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="typeBonus" class="form-label">Type de bonus</label>
+                <select class="form-select" id="typeBonus" th:field="${nouveauTypeAccessoire.typeBonus}" required>
+                    <option value="" disabled selected>Choisir un type de bonus</option>
+                    <option value="vitesse">Vitesse</option>
+                    <option value="attaque">Attaque</option>
+                    <option value="defense">Défense</option>
+                    <option value="endurance">Endurance</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Ajouter une arme</h1>
+        <form  novalidate class="validation" th:action="@{/admin/arme}" th:object="${arme}" method="post">
+            <!-- Champ Nom -->
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="nom" th:field="${arme.nom}" required>
+            </div>
+            <!-- Champ Description -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea minlength="3" maxlength="255" class="form-control" id="description" th:field="${arme.description}" required></textarea>
+            </div>
+            <!-- Champ Qualité -->
+            <div class="mb-3">
+                <label for="qualite" class="form-label">Qualité</label>
+                <select class="form-select" id="qualite" th:field="${arme.qualite.id}" required>
+                    <option disabled selected value="">Choisir une qualité</option>
+                    <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                </select>
+            </div>
+            <!-- Champ Type d'Arme -->
+            <div class="mb-3">
+                <label for="typeArme" class="form-label">Type d'Arme</label>
+                <select class="form-select" id="typeArme" th:field="${arme.typeArme.id}" required>
+                    <option disabled selected value="">Choisir un type d'arme</option>
+                    <option th:each="unType : ${typesArmes}" th:value="${unType.id}" th:text="${unType.nom}"></option>
+                </select>
+            </div>
+            <!-- Champ Chemin Image -->
+            <div class="mb-3">
+                <label for="cheminImage" class="form-label">Chemin Image</label>
+                <input type="text" class="form-control" id="cheminImage" th:field="${arme.cheminImage}">
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

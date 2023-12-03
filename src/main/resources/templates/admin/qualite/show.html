@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1 th:style="${'color:'+qualite.couleur}" th:text="'Qualite '+${qualite.nom}"></h1>
+        <ul>
+            <li th:text="'Nom : '+ ${qualite.nom}"></li>
+            <li th:text="'Bonus : '+${qualite.bonusQualite}"></li>
+            <li th:text="'Couleur : '+${qualite.couleur}"></li>
+        </ul>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

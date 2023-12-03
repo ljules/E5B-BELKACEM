@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <div th:replace="mesFragments:: fragFlashSuccess"></div>
+    <main class="container">
+        <h1>Gestion des potions</h1>
+                <div >
+                    <a th:href="@{'/admin/potion/create'}" class="btn btn-success">
+                        Ajouter une potion
+                    </a>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Soin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="unePotion : ${potions}">
+                        <td th:text="${unePotion.nom}"></td>
+                        <td th:text="${unePotion.soin}"></td>
+                        <td class="d-flex">
+                            <a th:href="@{'/admin/potion/'+${unePotion.id}+'/edit'}" class="btn btn-warning">
+                                Modifier
+                            </a>
+                            <a th:href="@{'/admin/potion/'+${unePotion.id}}" class="btn btn-primary">
+                                Consulter
+                            </a>
+                            <div>
+                                <form th:action="@{'/admin/potion/delete'}" method="post">
+                                    <input type="hidden" name="id" th:value="${unePotion.id}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

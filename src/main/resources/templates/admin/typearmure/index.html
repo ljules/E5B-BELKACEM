@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <div th:replace="mesFragments:: fragFlashSuccess"></div>
+    <main class="container">
+<h1>Gestion des types d'armures</h1>
+        <div >
+            <a th:href="@{'/admin/typeArmure/create'}" class="btn btn-success">
+                Ajouter un type d'armure
+            </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Bonus</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="unTypeArmure : ${typeArmures}">
+                <td th:text="${unTypeArmure.nom}"></td>
+                <td th:text="${unTypeArmure.bonusType}"></td>
+                <td class="d-flex">
+                    <a th:href="@{'/admin/typeArmure/'+${unTypeArmure.id}+'/edit'}" class="btn btn-warning">
+                        Modifier
+                    </a>
+                    <a th:href="@{'/admin/typeArmure/'+${unTypeArmure.id}}" class="btn btn-primary">
+                        Consulter
+                    </a>
+                    <div>
+                        <form th:action="@{'/admin/typeArmure/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${unTypeArmure.id}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+@GetMapping("/$acteur$/$ressource$")
+fun index(model: Model): String {
+    val $ressource$s = this.$ressource$Dao.findAll()
+    model.addAttribute("$ressource$s", $ressource$s)
+    return "$acteur$/$ressource$/index"
+}
+
+@GetMapping("/$acteur$/$ressource$/{id}")
+fun show(@PathVariable id: Long, model: Model): String {
+    val $ressource$ = this.$ressource$Dao.findById(id).orElseThrow()
+    model.addAttribute("$ressource$", $ressource$)
+    return "$acteur$/$ressource$/show"
+}
+
+@GetMapping("/$acteur$/$ressource$/create")
+fun create(model: Model): String {
+    val nouvelle$TypeRessource$ = $TypeRessource$(null)
+    model.addAttribute("nouvelle$TypeRessource$", nouvelle$TypeRessource$)
+    return "$acteur$/$ressource$/create"
+}
+
+@PostMapping("/$acteur$/$ressource$")
+fun store(@ModelAttribute nouvelle$TypeRessource$: $TypeRessource$, redirectAttributes: RedirectAttributes): String {
+    val saved$TypeRessource$ = this.$ressource$Dao.save(nouvelle$TypeRessource$)
+    redirectAttributes.addFlashAttribute("msgSuccess", "Enregistrement de ${saved$TypeRessource$.nom} réussi")
+    return "redirect:/$acteur$/$ressource$"
+}
+
+@GetMapping("/$acteur$/$ressource$/{id}/edit")
+fun edit(@PathVariable id: Long, model: Model): String {
+    val $ressource$ = this.$ressource$Dao.findById(id).orElseThrow()
+    model.addAttribute("$ressource$", $ressource$)
+    return "$acteur$/$ressource$/edit"
+}
+
+@PostMapping("/$acteur$/$ressource$/update")
+fun update(@ModelAttribute $ressource$: $TypeRessource$, redirectAttributes: RedirectAttributes): String {
+    val $ressource$Modifier = this.$ressource$Dao.findById($ressource$.id ?: 0).orElseThrow()
+    $ressource$Modifier.nom = $ressource$.nom
+    // TODO: Mettez à jour d'autres champs si nécessaire
+    val saved$TypeRessource$ = this.$ressource$Dao.save($ressource$Modifier)
+    redirectAttributes.addFlashAttribute("msgSuccess", "Modification de ${saved$TypeRessource$.nom}TypeRessource$.nom réussie")
+    return "redirect:/$acteur$/$ressource$"
+}
+
+@PostMapping("/$acteur$/$ressource$/delete")
+fun delete(@RequestParam id: Long, redirectAttributes: RedirectAttributes): String {
+    val $ressource$ = this.$ressource$Dao.findById(id).orElseThrow()
+    this.$ressource$Dao.delete($ressource$)
+    redirectAttributes.addFlashAttribute("msgSuccess", "Suppression de ${$ressource$.nom} réussie")
+    return "redirect:/$acteur$/$ressource$"
+}

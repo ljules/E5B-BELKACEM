@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails du type d'armure</h1>
+        <div>
+            <p><strong>Nom :</strong> <span th:text="${typeArmure.nom}"></span></p>
+            <p><strong>Bonus de type :</strong> <span th:text="${typeArmure.bonusType}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{'/admin/typeArmure/' + ${typeArmure.id} + '/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/typeArmure'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

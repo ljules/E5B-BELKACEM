@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Ajouter un accessoire</h1>
+        <form novalidate class="validation" th:action="@{/admin/accessoire}" th:object="${nouvelleAccessoire}" method="post">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="nom" th:field="${nouvelleAccessoire.nom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea minlength="3" maxlength="255" class="form-control" id="description" th:field="${nouvelleAccessoire.description}" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Chemin Image</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="image" th:field="${nouvelleAccessoire.cheminImage}">
+            </div>
+            <div class="mb-3">
+                <label for="qualite" class="form-label">Qualité</label>
+                <select class="form-select" id="qualite" th:field="${nouvelleAccessoire.qualite.id}" required>
+                    <option disabled="disabled" selected="selected" value="">Choisir une qualite</option>
+                    <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="typeAccessoire" class="form-label">Type d'accessoire</label>
+                <select class="form-select" id="typeAccessoire" th:field="${nouvelleAccessoire.typeAccessoire.id}" required>
+                    <option disabled selected value="">Choisir un type d'accessoire</option>
+                    <option th:each="unType : ${types}" th:value="${unType.id}" th:text="${unType.nom}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div class="vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <div th:replace="mesFragments:: fragFlashSuccess"></div>
+    <main class="container">
+        <div class="col-8 col-lg-6 mx-auto p-2  mt-3">
+            <form action="/login" method="post">
+                <h1>Login</h1>
+                <!-- Affiche le message d'erreur si l'attribut "error" est présent dans le modèle -->
+                <p th:if="${error}" class="alert alert-danger">Identifiants incorrects. Veuillez réessayer.</p>
+                <div class="mb-3">
+                    <label for="username">Email</label>
+                    <input required class="form-control" id="username" name="username" type="text">
+                </div>
+                <div class="mb-3">
+                    <label for="password">Mdp</label>
+                    <input required class="form-control" id="password" name="password" type="password">
+                </div>
+                <button class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

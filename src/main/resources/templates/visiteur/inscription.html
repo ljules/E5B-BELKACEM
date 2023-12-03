@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <div class="col-8 col-lg-6 mx-auto mt-2">
+        <h1>Formulaire d'inscription</h1>
+        <ul th:if="${erreurs}" class="alert alert-danger">
+            <li th:each="erreur:${erreurs}" th:text="${erreur}"></li>
+        </ul>
+        <form action="/inscription" method="post" th:object="${utilisateur}">
+            <div class="mb3">
+                <label for="email">Email</label>
+                <input required id="email" th:field="${utilisateur.email}"  type="email" class="form-control">
+            </div>
+            <div class="mb3">
+                <label for="mdp">Mot de passe</label>
+                <input required minlength="8" id="mdp" th:field="${utilisateur.mdp}" type="password" class="form-control">
+            </div>
+            <div class="mb3">
+                <label for="confirmationMdp">Confirmation mot de passe</label>
+                <input required minlength="8" id="confirmationMdp" name="confirmationMdp" type="password" class="form-control">
+            </div>
+            <div class="my-3 row">
+            <button class="btn btn-primary col-6 mx-auto">Envoyer</button>
+            </div>
+        </form>
+    </div>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

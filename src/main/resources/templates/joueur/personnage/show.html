@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <!-- Ajouter la structure HTML nécessaire, les balises HEAD, BODY, etc. -->
+    <!-- Assurez-vous d'inclure les dépendances CSS et JavaScript nécessaires si vous en utilisez -->
+
+    <main class="container">
+        <h1>Détails du personnage</h1>
+        <div>
+            <p><strong>Nom : </strong> <span th:text="${personnage.nom}"></span></p>
+            <p><strong>Attaque : </strong> <span th:text="${personnage.attaque}"></span></p>
+            <p><strong>Défense : </strong> <span th:text="${personnage.defense}"></span></p>
+            <p><strong>Endurance : </strong> <span th:text="${personnage.endurance}"></span></p>
+            <p><strong>Vitesse : </strong> <span th:text="${personnage.vitesse}"></span></p>
+
+            <!-- Afficher l'arme équipée -->
+            <p><strong>Arme équipée : </strong>
+            <div th:if="${personnage.armeEquipee != null}">
+                <div>Nom : <span th:style="${'color:'+personnage.armeEquipee.qualite.couleur+';'}"
+                                 th:text="${personnage.armeEquipee.nom}"></span></div>
+                <div>Dégâts : <span
+                        th:text="${personnage.armeEquipee.typeArme.nbrDes+'d'+personnage.armeEquipee.typeArme.maxDes+' + '+personnage.armeEquipee.qualite.bonusQualite}"></span>
+                </div>
+                <div>Critique : <span
+                        th:text="${'Déclencheur : '+personnage.armeEquipee.typeArme.limiteCritique+'  Mutlitplicateur : '+personnage.armeEquipee.typeArme.mutiplicateurCritique}"></span>
+                </div>
+                <div>Description : <span th:text="${personnage.armeEquipee.description}"></span></div>
+            </div>
+            <div th:unless="${personnage.armeEquipee != null}">Aucune</div>
+            </p>
+
+            <!-- Afficher l'armure équipée -->
+            <p><strong>Armure équipée : </strong>
+            <div th:if="${personnage.armureEquipee != null}">
+                <div>Nom : <span th:style="${'color:'+personnage.armureEquipee.qualite.couleur+';'}"
+                                 th:text="${personnage.armureEquipee.nom}"></span></div>
+                <div>Bonus Defense : <span
+                        th:text="${personnage.armeEquipee.qualite.bonusQualite+personnage.armureEquipee.typeArmure.bonusType}"></span>
+                </div>
+                <div>Description : <span th:text="${personnage.armureEquipee.description}"></span></div>
+            </div>
+            <div th:unless="${personnage.armureEquipee != null}">Aucune</div>
+            </p>
+            <!-- Afficher l'accessoire équipé -->
+            <p><strong>Accesoire équipé : </strong>
+            <div th:if="${personnage.accessoire != null}">
+                <div>Nom : <span th:style="${'color:'+personnage.accessoire.qualite.couleur+';'}"
+                                 th:text="${personnage.accessoire.nom}"></span></div>
+                <div>Bonus : <span
+                        th:text="${personnage.accessoire.typeAccessoire.typeBonus+' +'+personnage.accessoire.qualite.bonusQualite}"></span>
+                </div>
+                <div>Description : <span th:text="${personnage.accessoire.description}"></span></div>
+            </div>
+            <div th:unless="${personnage.armureEquipee != null}">Aucune</div>
+            </p>
+
+            <!-- Ajouter d'autres détails du personnage si nécessaire -->
+
+        </div>
+        <div>
+            <a th:href="@{'/joueur/personnage/'+${personnage.id}+'/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/joueur/personnage'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="display-4">Bienvenue dans votre jeu de rôle!</h1>
+                <p class="lead">Préparez-vous pour l'aventure et le combat.</p>
+
+            </div>
+        </section>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

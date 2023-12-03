@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails du type d'arme</h1>
+        <div>
+            <p><strong>Nom :</strong> <span th:text="${typeArme.nom}"></span></p>
+            <p><strong>Nombre de dés :</strong> <span th:text="${typeArme.nbrDes}"></span></p>
+            <p><strong>Maximum des dés :</strong> <span th:text="${typeArme.maxDes}"></span></p>
+            <p><strong>Limite Critique :</strong> <span th:text="${typeArme.limiteCritique}"></span></p>
+            <p><strong>Multiplicateur Critique :</strong> <span th:text="${typeArme.mutiplicateurCritique}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{'/admin/typeArme/' + ${typeArme.id} + '/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/typeArme'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>
