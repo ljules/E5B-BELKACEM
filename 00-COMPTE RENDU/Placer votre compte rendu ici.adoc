@@ -1,0 +1,41 @@
+= Compte-rendu
+:doctype: book
+
+== Épreuve E5
+
+Pour l’implémentation du code, j’ai prévu de faire les missions dans l’ordre BAC, et c’est ce que j’ai fais.
+
+=== I. Faire en sorte de pouvoir afficher sur une nouvelle page le détail d’une potion.
+
+Premièrement, j’ai copié le fichier show.html d’un autre template et je l’ai adapté comme cela :
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails de l'potion</h1>
+        <div>
+            <p><strong>Nom : </strong> <span th:text="${potion.nom}"></span></p>
+            <p><strong>Description : </strong> <span th:text="${potion.description}"></span></p>
+            <p><strong>Soin : </strong> <span th:text="${potion.soin}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{'/admin/potion/'+${potion.id}+'/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/potion'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

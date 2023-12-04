@@ -4,6 +4,7 @@ import com.example.springaventure.model.dao.ArmureDao
 import com.example.springaventure.model.dao.QualiteDao
 import com.example.springaventure.model.dao.TypeArmureDao
 import com.example.springaventure.model.entity.Armure
+import com.example.springaventure.model.entity.Personnage
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*

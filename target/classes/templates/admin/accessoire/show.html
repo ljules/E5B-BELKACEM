@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails de l'accessoire</h1>
+        <div>
+            <p><strong>Nom:</strong> <span th:text="${accessoire.nom}"></span></p>
+            <p><strong>Description:</strong> <span th:text="${accessoire.description}"></span></p>
+            <p><strong>Chemin Image:</strong> <span th:text="${accessoire.cheminImage}"></span></p>
+            <p><strong>Qualité:</strong> <span th:text="${accessoire.qualite.nom}"></span></p>
+            <p><strong>Bonus de Qualité:</strong> <span th:text="${accessoire.qualite.bonusQualite}"></span></p>
+            <p><strong>Type d'accessoire:</strong> <span th:text="${accessoire.typeAccessoire.nom}"></span></p>
+            <p><strong>Type Bonus:</strong> <span th:text="${accessoire.typeAccessoire.typeBonus}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{'/admin/accessoire/'+${accessoire.id}+'/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/accessoire'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

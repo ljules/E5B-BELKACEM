@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Modifier une armure</h1>
+        <form novalidate class="validation" th:action="@{/admin/armure/update}" th:object="${armure}" method="post">
+            <input type="hidden" th:field="${armure.id}">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="nom" th:field="${armure.nom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea minlength="3" maxlength="255" class="form-control" id="description" th:field="${armure.description}" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Chemin Image</label>
+                <input type="text" class="form-control" id="image" th:field="${armure.cheminImage}" >
+            </div>
+            <div class="mb-3">
+                <label for="qualite" class="form-label">Qualité</label>
+                <select class="form-select" id="qualite" th:field="${armure.qualite.id}" required>
+                    <option disabled="disabled" selected="selected" value="">Choisir une qualité</option>
+                    <option th:each="uneQualite : ${qualites}" th:value="${uneQualite.id}" th:text="${uneQualite.nom}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="typeArmure" class="form-label">Type d'armure</label>
+                <select class="form-select" id="typeArmure" th:field="${armure.typeArmure.id}" required>
+                    <option disabled selected value="">Choisir un type d'armure</option>
+                    <option th:each="unType : ${typesArmure}" th:value="${unType.id}" th:text="${unType.nom}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </form>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

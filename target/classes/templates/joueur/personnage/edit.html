@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+
+    <main class="container">
+        <h1>Modifier le personnage</h1>
+
+        <form novalidate class="validation" th:action="@{/joueur/personnage/update}" th:object="${personnage}" method="post">
+            <input type="hidden" th:field="${personnage.id}">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input minlength="3" maxlength="255" type="text" class="form-control" id="nom" th:field="${personnage.nom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="attaque" class="form-label">Attaque</label>
+                <input min="0" minlength="99" type="number" class="form-control" id="attaque" th:field="${personnage.attaque}" required>
+            </div>
+            <div class="mb-3">
+                <label for="defense" class="form-label">Défense</label>
+                <input min="0" minlength="99" type="number" class="form-control" id="defense" th:field="${personnage.defense}" required>
+            </div>
+            <div class="mb-3">
+                <label for="endurance" class="form-label">Endurance</label>
+                <input min="0" minlength="99" type="number" class="form-control" id="endurance" th:field="${personnage.endurance}" required>
+            </div>
+            <div class="mb-3">
+                <label for="vitesse" class="form-label">Vitesse</label>
+                <input min="0" minlength="99" type="number" class="form-control" id="vitesse" th:field="${personnage.vitesse}" required>
+            </div>
+
+            <!-- Ajoutez d'autres champs du formulaire si nécessaire -->
+
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </form>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+<script src="/js/validation.js"></script>
+</body>
+</html>

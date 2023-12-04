@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Campagne</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <!-- Titre de la page -->
+        <h1>Mes campagnes</h1>
+
+        <!-- Barre d'actions -->
+        <div>
+            <!-- Lien pour ajouter une nouvelle campagne -->
+            <a href="/joueur/campagne/create" class="btn btn-success my-2">Ajouter une Campagne</a>
+
+            <!-- Barre de recherche -->
+            <form class="my-2" th:action="@{/joueur/campagne}" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Rechercher" name="search"
+                           th:value="${search}" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Rechercher</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Gestion du cas où aucune campagne n'est trouvée -->
+        <div th:if="${campagnes.content.size()==0}">
+            <p>Aucune campagne trouvée.</p>
+        </div>
+
+        <!-- Affichage des campagnes -->
+        <div class="row my-2">
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- Liens de pagination -->
+                    <li class="page-item" th:if="${campagnes.hasPrevious()}">
+                        <a class="page-link" th:href="@{${'/joueur/campagne'}(page=0, size=${campagnes.size}, sort=${campagnes.sort})}">Première</a>
+                    </li>
+                    <li class="page-item" th:if="${campagnes.hasPrevious()}">
+                        <a class="page-link" th:href="@{${'/joueur/campagne'}(page=${campagnes.number - 1}, size=${campagnes.size}, sort=${campagnes.sort})}">Précédente</a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, campagnes.totalPages - 1)}" th:class="${campagnes.number == page} ? 'active' : ''">
+                        <a class="page-link" th:href="@{${'/joueur/campagne'}(page=${page}, size=${campagnes.size}, sort=${campagnes.sort})}" th:text="${page + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:if="${campagnes.hasNext()}">
+                        <a class="page-link" th:href="@{${'/joueur/campagne'}(page=${campagnes.number + 1}, size=${campagnes.size}, sort=${campagnes.sort})}">Suivante</a>
+                    </li>
+                    <li class="page-item" th:if="${campagnes.hasNext()}">
+                        <a class="page-link" th:href="@{${'/joueur/campagne'}(page=${campagnes.totalPages - 1}, size=${campagnes.size}, sort=${campagnes.sort})}">Dernière</a>
+                    </li>
+                    <!-- ... -->
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Tableau d'affichage des campagnes -->
+        <table th:else class="table table-striped">
+            <thead>
+            <!-- En-têtes du tableau -->
+            <tr>
+                <th>Nom</th>
+                <th>Statut</th>
+                <th>Meilleur Score</th>
+                <th>Dernier Score</th>
+                <th>Combats</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Lignes du tableau avec les données des campagnes -->
+            <tr th:each="uneCampagne : ${campagnes}">
+                <td th:text="${uneCampagne.nom}"></td>
+                <td th:text="${uneCampagne.statut}"></td>
+                <td th:text="${uneCampagne.meilleurScore}"></td>
+                <td th:text="${uneCampagne.dernierScore}"></td>
+                <td>
+                    <ul>
+                        <!-- Liste des noms des monstres pour chaque combat de la campagne -->
+                        <li th:text="${unCombat.monstre.nom}" th:each="unCombat:${uneCampagne.combats}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <!-- Actions pour chaque campagne -->
+                    <div class="d-flex">
+                        <a th:href="'/joueur/campagne/'+${uneCampagne.id}+'/jouer'" class="btn btn-success">
+                            Jouer/Reprendre
+                        </a>
+                        <a href="" class="btn btn-primary">
+                            Reset
+                        </a>
+                        <div>
+                            <form th:action="@{'/joueur/campagne/delete'}" method="post">
+                                <input type="hidden" name="id" th:value="${uneCampagne.id}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <div th:replace="mesFragments:: fragFlashSuccess"></div>
+    <main class="container">
+<h1>Gestion des types d'armes</h1>
+        <div >
+            <a th:href="@{'/admin/typeArme/create'}" class="btn btn-success">
+                Ajouter un type d'arme
+            </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Degat</th>
+                <th>Déclencheur de critique</th>
+                <th>Multiplicateur de critique</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="unTypeArme : ${typeArmes}">
+                <td th:text="${unTypeArme.nom}"></td>
+                <td th:text="${unTypeArme.nbrDes+'d'+unTypeArme.maxDes}"></td>
+                <td th:text="${unTypeArme.limiteCritique}"></td>
+                <td th:text="${unTypeArme.mutiplicateurCritique}"></td>
+                <td class="d-flex">
+                    <a th:href="@{'/admin/typeArme/'+${unTypeArme.id}+'/edit'}" class="btn btn-warning">
+                        Modifier
+                    </a>
+                    <a th:href="@{'/admin/typeArme/'+${unTypeArme.id}}" class="btn btn-primary">
+                        Consulter
+                    </a>
+                    <div>
+                        <form th:action="@{'/admin/typeArme/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${unTypeArme.id}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

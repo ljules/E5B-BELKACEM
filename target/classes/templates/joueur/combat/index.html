@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Combat</h1>
+        <div class="row row-cols-2 ">
+            <div class="card mx-auto" style="width: 18rem;">
+                <img th:src="@{/img/personnage/hero.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${combat.campagne.hero.nom}">Card title</h5>
+                    <p th:text="${combat.campagne.hero.pointDeVie+'/'+combat.campagne.hero.pointDeVieMax}"></p>
+                    <div class="progress" role="progressbar" aria-label="vieHero">
+                        <div th:class="${combat.campagne.hero.pointDeVie>combat.campagne.hero.pointDeVieMax/2?'bg-success':'bg-danger'}"
+                             class="px-1 progress-bar"
+                             th:style="'width: ' + ${combat.campagne.hero.pointDeVie * 100 / combat.campagne.hero.pointDeVieMax} + '%'">
+
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Attaque :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.campagne.hero.attaque}"></span>
+                        </li>
+                        <li class="list-group-item">Defense :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.campagne.hero.defense}"></span>
+                        </li>
+                        <li class="list-group-item">Endurance :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.campagne.hero.endurance}"></span>
+                        </li>
+                        <li class="list-group-item">Vitesse :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.campagne.hero.vitesse}"></span>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Arme :
+                            <div th:if="${combat.campagne.hero.armeEquipee!=null}"
+                                 th:style="'color :'+${combat.campagne.hero.armeEquipee.qualite.getCouleur()}"
+                                 th:text="${combat.campagne.hero.armeEquipee.nom}"></div>
+                            <div th:unless="${combat.campagne.hero.armeEquipee!=null}">Pas d'arme</div>
+                        </li>
+                        <li class="list-group-item">
+                            Armure :
+                            <div th:if="${combat.campagne.hero.armureEquipee!=null}"
+                                 th:style="'color :'+${combat.campagne.hero.armureEquipee.qualite.getCouleur()}"
+                                 th:text="${combat.campagne.hero.armureEquipee.nom}"></div>
+                            <div th:unless="${combat.campagne.hero.armureEquipee!=null}">Pas d'armure</div>
+                        </li>
+
+                    </ul>
+
+                    <div class="" role="group" aria-label="Button group with nested dropdown">
+
+                        <form class="mb-1 mx-auto row"
+                              th:action="@{/joueur/combat/{idCombat}/boirePotion(idCombat=${combat.id})}" method="post">
+                            <button class="btn btn-primary">Boire Potion</button>
+                        </form>
+
+                        <form class="mb-1 mx-auto row"
+                              th:action="@{/joueur/combat/{idCombat}/attendre(idCombat=${combat.id})}" method="post">
+                            <button class="btn btn-primary">Attendre</button>
+                        </form>
+                        <div class="mb-1 mx-auto row">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inventaireHero">Voir Inventaire</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 18rem;">
+                <img th:src="'/img/personnage/monstre.jpg'" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${combat.monstre.nom}">Card title</h5>
+                    <p th:text="${combat.monstre.pointDeVie+'/'+combat.monstre.pointDeVieMax}"></p>
+                    <div class="progress" role="progressbar" aria-label="vieMonstre">
+                        <div th:class="${combat.monstre.pointDeVie>combat.monstre.pointDeVieMax/2?'bg-success':'bg-danger'}"
+                             class="progress-bar px-1"
+                             th:style="'width: ' + ${combat.monstre.pointDeVie * 100 / combat.monstre.pointDeVieMax} + '%'">
+
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Attaque :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.monstre.attaque}"></span>
+                        </li>
+                        <li class="list-group-item">Defense :
+                            <span class="badge bg-primary rounded-pill"  th:text="${combat.monstre.defense}"></span>
+                        </li>
+                        <li class="list-group-item">Endurance :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.monstre.endurance}"></span>
+                        </li>
+                        <li class="list-group-item">Vitesse :
+                            <span class="badge bg-primary rounded-pill" th:text="${combat.monstre.vitesse}"></span>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item row">
+                            Arme :
+                            <div th:if="${combat.monstre.armeEquipee!=null}"
+                                 th:style="'color :'+${combat.monstre.armeEquipee.qualite.getCouleur()}"
+                                 th:text="${combat.monstre.armeEquipee.nom}"></div>
+                            <div th:unless="${combat.monstre.armeEquipee!=null}">Pas d'arme</div>
+                        </li>
+                        <li class="list-group-item row">
+                            Armure :
+                            <div th:if="${combat.monstre.armureEquipee!=null}"
+                                 th:style="'color :'+${combat.monstre.armureEquipee.qualite.getCouleur()}"
+                                 th:text="${combat.monstre.armureEquipee.nom}"></div>
+                            <div th:unless="${combat.monstre.armureEquipee!=null}">Pas d'armure</div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <form class="mb-1 mx-auto row"
+                                  th:action="@{/joueur/combat/{idCombat}/attaque/{idCible}(idCombat=${combat.id}, idCible=${combat.monstre.id})}"
+                                  method="post">
+                                <button class="btn btn-primary">Attaquer</button>
+                            </form>
+                            <div class="mb-1 mx-auto row">
+                                <button class="btn btn-primary row">Voir Inventaire</button>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="row my-3">
+            <div th:if="${messages != null}">
+                <div class="alert alert-info">
+                    <h4>Messages de combat :</h4>
+                    <ul>
+                        <li th:each="message : ${messages}" th:utext="${message}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voir Inventaire Hero -->
+        <div class="modal fade" id="inventaireHero" tabindex="-1" aria-labelledby="inventaireHero" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" th:text="${'Inventaire de '+combat.campagne.hero.nom}">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:each="uneLigne : ${combat.campagne.hero.ligneInventaires}">
+                                <span th:text="${uneLigne.item.nom+' X '+uneLigne.quantite}"></span>
+                                <form th:action="'/joueur/combat/'+${combat.id}+'/utiliser?idItem='+${uneLigne.item.id}" method="post"></form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>

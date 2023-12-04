@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="mesFragments :: fragHead">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="min-vh-100">
+    <nav th:replace="mesFragments :: fragNav"></nav>
+    <main class="container">
+        <h1>Détails de l'armure</h1>
+        <div>
+            <p><strong>Nom : </strong> <span th:text="${armure.nom}"></span></p>
+            <p><strong>Description : </strong> <span th:text="${armure.description}"></span></p>
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Type d'armure : </strong> <span th:text="${armure.typeArmure.nom}"></span></p>
+                    <p><strong>Bonus du type : </strong> <span th:text="${armure.typeArmure.bonusType}"></span></p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Qualité : </strong> <span th:text="${armure.qualite.nom}"></span></p>
+                    <p><strong>Bonus de qualité : </strong> <span th:text="${armure.qualite.bonusQualite}"></span></p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a th:href="@{'/admin/armure/'+${armure.id}+'/edit'}" class="btn btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{'/admin/armure'}" class="btn btn-primary">
+                Retour à la liste
+            </a>
+        </div>
+    </main>
+
+</div>
+<footer th:replace="mesFragments :: fragFooter"></footer>
+</body>
+</html>
